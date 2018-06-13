@@ -1,19 +1,42 @@
 import React from "react";
-import { Form, Image, Button, Table } from "semantic-ui-react";
+import { Form, Image, Button, List, Icon } from "semantic-ui-react";
+import Immutable from "immutable";
 
-class GithubCreation extends React.Component {
+class GenericForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.updateState = this.updateState.bind(this);
+  }
+
+  updateState(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+}
+
+const DeletionList = props => (
+  <List>
+    {props.collection.map(item => (
+      <List.Item>
+        <Icon
+          link
+          color="red"
+          name="times"
+          onClick={() => props.remove(item)}
+        />
+        {item}
+      </List.Item>
+    ))}
+  </List>
+);
+
+class GithubCreation extends GenericForm {
   constructor(props) {
     super(props);
     this.state = {
       githubUsername: ""
     };
 
-    this.updateState = this.updateState.bind(this);
     this.add = this.add.bind(this);
-  }
-
-  updateState(event) {
-    this.setState({ [event.target.name]: event.target.value });
   }
 
   add() {
@@ -38,60 +61,81 @@ class GithubCreation extends React.Component {
   }
 }
 
-const GithubList = props => (
-  <Table>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell />
-        <Table.HeaderCell />
-      </Table.Row>
-    </Table.Header>
-    <Table.Body>
-      {props.githubUsernameCollection.map(username => (
-        <Table.Row>
-          <Table.Cell>{username}</Table.Cell>
-          <Table.Cell>
-            <Button onClick={() => props.remove(username)}>Exclude</Button>
-          </Table.Cell>
-        </Table.Row>
-      ))}
-    </Table.Body>
-  </Table>
-);
+class WordpressCreation extends GenericForm {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wordpressUrl: ""
+    };
+    this.add = this.add.bind(this);
+  }
 
-export default class UserCreation extends React.Component {
+  add() {
+    this.props.add(this.state.wordpressUrl);
+    this.setState({ wordpressUrl: "" });
+  }
+
+  render() {
+    return (
+      <Form.Group widths="equal">
+        <Form.Field>
+          <label>Wordpress Url:</label>
+          <input
+            name="wordpressUrl"
+            value={this.state.wordpressUrl}
+            onChange={this.updateState}
+          />
+        </Form.Field>
+        <Form.Button onClick={this.add}>Add</Form.Button>
+      </Form.Group>
+    );
+  }
+}
+
+export default class UserCreation extends GenericForm {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
       profilePicture: "",
-      githubUsernameCollection: [],
-      wordpressUrlCollection: []
+      githubUsernameCollection: new Immutable.List(),
+      wordpressUrlCollection: new Immutable.List()
     };
-    this.updateState = this.updateState.bind(this);
     this.addGithubUser = this.addGithubUser.bind(this);
     this.removeGithubUser = this.removeGithubUser.bind(this);
-  }
-
-  updateState(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    this.addWordpressSite = this.addWordpressSite.bind(this);
+    this.removeWordpressSite = this.removeWordpressSite.bind(this);
   }
 
   addGithubUser(githubUser) {
     this.setState({
-      githubUsernameCollection: [
-        ...this.state.githubUsernameCollection,
+      githubUsernameCollection: this.state.githubUsernameCollection.push(
         githubUser
-      ]
+      )
+    });
+  }
+
+  addWordpressSite(wordpressSite) {
+    this.setState({
+      wordpressUrlCollection: this.state.wordpressUrlCollection.push(
+        wordpressSite
+      )
     });
   }
 
   removeGithubUser(githubUser) {
-    const githubUsernameCollection = this.state.githubUsernameCollection.filter(
-      username => username != githubUser
-    );
     this.setState({
-      githubUsernameCollection
+      githubUsernameCollection: this.state.githubUsernameCollection.filter(
+        username => username != githubUser
+      )
+    });
+  }
+
+  removeWordpressSite(wordpressSite) {
+    this.setState({
+      wordpressUrlCollection: this.state.wordpressUrlCollection.filter(
+        url => wordpressSite != url
+      )
     });
   }
 
@@ -117,9 +161,14 @@ export default class UserCreation extends React.Component {
           </Form.Field>
         </Form.Group>
         <GithubCreation add={this.addGithubUser} />
-        <GithubList
+        <DeletionList
           remove={this.removeGithubUser}
-          githubUsernameCollection={this.state.githubUsernameCollection}
+          collection={this.state.githubUsernameCollection}
+        />
+        <WordpressCreation add={this.addWordpressSite} />
+        <DeletionList
+          remove={this.removeWordpressSite}
+          collection={this.state.wordpressUrlCollection}
         />
       </Form>
     );
