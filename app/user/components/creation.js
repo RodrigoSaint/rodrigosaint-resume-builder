@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Image, Button, List, Icon } from "semantic-ui-react";
 import Immutable from "immutable";
+import axios from "axios";
 
 class GenericForm extends React.Component {
   constructor(props) {
@@ -55,7 +56,11 @@ class GithubCreation extends GenericForm {
             onChange={this.updateState}
           />
         </Form.Field>
-        <Form.Button onClick={this.add}>Add</Form.Button>
+        <Form.Field>
+          <Button className="margin-top-default" onClick={this.add}>
+            Add
+          </Button>
+        </Form.Field>
       </Form.Group>
     );
   }
@@ -86,7 +91,11 @@ class WordpressCreation extends GenericForm {
             onChange={this.updateState}
           />
         </Form.Field>
-        <Form.Button onClick={this.add}>Add</Form.Button>
+        <Form.Field>
+          <Button className="margin-top-default" onClick={this.add}>
+            Add
+          </Button>
+        </Form.Field>
       </Form.Group>
     );
   }
@@ -105,6 +114,7 @@ export default class UserCreation extends GenericForm {
     this.removeGithubUser = this.removeGithubUser.bind(this);
     this.addWordpressSite = this.addWordpressSite.bind(this);
     this.removeWordpressSite = this.removeWordpressSite.bind(this);
+    this.save = this.save.bind(this);
   }
 
   addGithubUser(githubUser) {
@@ -139,6 +149,13 @@ export default class UserCreation extends GenericForm {
     });
   }
 
+  save() {
+    axios
+      .post("http://localhost:8000/user", this.state)
+      .then(error => alert("Sucess"))
+      .catch(error => console.dir(error));
+  }
+
   render() {
     return (
       <Form>
@@ -170,6 +187,7 @@ export default class UserCreation extends GenericForm {
           remove={this.removeWordpressSite}
           collection={this.state.wordpressUrlCollection}
         />
+        <Form.Button onClick={this.save}>Create User</Form.Button>
       </Form>
     );
   }

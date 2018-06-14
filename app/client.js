@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./index.css";
 
 import UserCreation from "./user/components/creation";
 
 ReactDOM.render(
-  <div class="ui grid centered">
-    <div class="twelve wide column">
+  <div className="ui grid centered">
+    <div className="twelve wide column">
       <UserCreation />
     </div>
   </div>,

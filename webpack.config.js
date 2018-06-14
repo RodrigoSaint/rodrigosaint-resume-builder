@@ -18,6 +18,10 @@ module.exports = {
           babelrc: false,
           presets: ["stage-2", "react"]
         }
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
