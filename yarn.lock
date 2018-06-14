@@ -4785,6 +4785,10 @@ selfsigned@^1.9.1:
   dependencies:
     node-forge "0.7.5"
 
+semantic-ui-github-components@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/semantic-ui-github-components/-/semantic-ui-github-components-1.0.5.tgz#d55124341e14171aa36cdd7ee33e9a90fec0869a"
+
 semantic-ui-react@^0.81.1:
   version "0.81.1"
   resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.81.1.tgz#9bf8e1949aac8584173f0acb11c6ce05008bcbfc"
@@ -4795,6 +4799,10 @@ semantic-ui-react@^0.81.1:
     keyboard-key "^1.0.1"
     lodash "^4.17.10"
     prop-types "^15.6.1"
+
+semantic-ui-wordpress-components@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-wordpress-components/-/semantic-ui-wordpress-components-1.0.3.tgz#ce6fa1aa1cefa25164b557606e564dcbb2f28712"
 
 "semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@^5.5.0:
   version "5.5.0"

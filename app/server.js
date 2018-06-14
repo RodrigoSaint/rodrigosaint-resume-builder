@@ -1,9 +1,11 @@
 import express from "express";
 import repository from "./repository";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 const mainApplication = express();
 mainApplication.use(bodyParser.json());
+mainApplication.use(cors());
 
 mainApplication.get("/", (request, response) => {
   response.send("Hello world");
