@@ -106,6 +106,7 @@ export default class UserCreation extends GenericForm {
     super(props);
     this.state = {
       name: "",
+      nameOnUrl: "",
       profilePicture: "",
       githubUsernameCollection: new Immutable.List(),
       wordpressUrlCollection: new Immutable.List()
@@ -168,6 +169,16 @@ export default class UserCreation extends GenericForm {
               value={this.state.name}
             />
           </Form.Field>
+          <Form.Field>
+            <label>Name: </label>
+            <input
+              name="name"
+              onChange={this.updateState}
+              value={this.state.name}
+            />
+          </Form.Field>
+        </Form.Group>
+        <Form.Group>
           <Form.Field>
             <label>Profile picture: </label>
             <input

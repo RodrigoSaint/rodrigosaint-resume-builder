@@ -17,8 +17,8 @@ mainApplication.get("/user", (request, response) => {
     .catch(() => response.status(500));
 });
 
-mainApplication.get("/user/:id", (request, response) => {
-  repository.User.findById(request.params.id)
+mainApplication.get("/user/:username", (request, response) => {
+  repository.User.findOne({ nameOnUrl: request.params.username })
     .then(userCollection => response.status(200).send(userCollection))
     .catch(() => response.status(500));
 });
