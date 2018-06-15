@@ -27,8 +27,9 @@ export default class ResumeView extends React.Component {
   constructor(props) {
     super(props);
     axios
-      .get("http://localhost:8000/user/5b2287d9551af0261c80c13f")
-      .then(result => this.setState(result.data));
+      .get(`http://localhost:8000/user/${props.username}`)
+      .then(result => this.setState(result.data))
+      .catch(() => alert("User not found"));
     this.state = {
       name: "",
       profilePicture: "",
