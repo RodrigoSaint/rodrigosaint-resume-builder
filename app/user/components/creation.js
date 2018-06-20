@@ -170,11 +170,11 @@ export default class UserCreation extends GenericForm {
             />
           </Form.Field>
           <Form.Field>
-            <label>Name: </label>
+            <label>Url path: </label>
             <input
-              name="name"
+              name="nameOnUrl"
               onChange={this.updateState}
-              value={this.state.name}
+              value={this.state.nameOnUrl}
             />
           </Form.Field>
         </Form.Group>
