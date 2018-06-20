@@ -2,6 +2,18 @@ import React from "react";
 import { Form, Image, Button, List, Icon } from "semantic-ui-react";
 import Immutable from "immutable";
 import axios from "axios";
+import { validate, isRequired } from "kaizen-validation";
+
+function validateUser(user) {
+  return validate(
+    {
+      name: [isRequired],
+      nameOnUrl: [isRequired],
+      profilePicture: [isRequired]
+    },
+    user
+  );
+}
 
 class GenericForm extends React.Component {
   constructor(props) {
@@ -109,7 +121,8 @@ export default class UserCreation extends GenericForm {
       nameOnUrl: "",
       profilePicture: "",
       githubUsernameCollection: new Immutable.List(),
-      wordpressUrlCollection: new Immutable.List()
+      wordpressUrlCollection: new Immutable.List(),
+      errors: null
     };
     this.addGithubUser = this.addGithubUser.bind(this);
     this.removeGithubUser = this.removeGithubUser.bind(this);
@@ -151,42 +164,54 @@ export default class UserCreation extends GenericForm {
   }
 
   save() {
+    let errors = validateUser(this.state);
+    if (errors) {
+      alert("There are some invalid fields");
+      this.setState({ errors });
+      console.log(errors);
+      return;
+    }
     axios
       .post("http://localhost:8000/user", this.state)
       .then(error => alert("Sucess"))
       .catch(error => console.dir(error));
   }
 
+  getError(property) {
+    return this.state.errors && this.state.errors.name;
+  }
+
   render() {
     return (
       <Form>
         <Form.Group widths="equal">
-          <Form.Field>
-            <label>Name: </label>
-            <input
-              name="name"
-              onChange={this.updateState}
-              value={this.state.name}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Url path: </label>
-            <input
-              name="nameOnUrl"
-              onChange={this.updateState}
-              value={this.state.nameOnUrl}
-            />
-          </Form.Field>
+          <Form.Input
+            fluid
+            label="Name"
+            placeholder="Name"
+            onChange={this.updateState}
+            value={this.state.name}
+            error={this.getError("name")}
+          />
+          <Form.Input
+            fluid
+            label="Url path"
+            placeholder="Url path"
+            onChange={this.updateState}
+            value={this.state.nameOnUrl}
+            error={this.getError("updateState")}
+          />
         </Form.Group>
-        <Form.Group>
-          <Form.Field>
-            <label>Profile picture: </label>
-            <input
-              name="profilePicture"
-              onChange={this.updateState}
-              value={this.state.profilePicture}
-            />
-          </Form.Field>
+        <Form.Group widths="equal">
+          <Form.Input
+            fluid
+            label="Profile Picture"
+            placeholder="Profile Picture"
+            name="profilePicture"
+            onChange={this.updateState}
+            value={this.state.profilePicture}
+            error={this.getError("updateState")}
+          />
         </Form.Group>
         <GithubCreation add={this.addGithubUser} />
         <DeletionList

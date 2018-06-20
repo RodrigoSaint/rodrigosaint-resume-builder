@@ -3149,6 +3149,10 @@ json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
+kaizen-validation@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/kaizen-validation/-/kaizen-validation-1.0.10.tgz#0f6b039413e8de832639d2871206cc0313bc1b9b"
+
 kareem@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.1.0.tgz#d63197b57311830e4ceb3f34431f22f2de826a03"
