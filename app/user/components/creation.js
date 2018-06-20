@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Image, Button, List, Icon } from "semantic-ui-react";
+import { Form, Button, List, Icon, Modal, Message } from "semantic-ui-react";
 import Immutable from "immutable";
 import axios from "axios";
 import { validate, isRequired } from "kaizen-validation";
@@ -122,13 +122,15 @@ export default class UserCreation extends GenericForm {
       profilePicture: "",
       githubUsernameCollection: new Immutable.List(),
       wordpressUrlCollection: new Immutable.List(),
-      errors: null
+      errors: null,
+      showErrorModal: false
     };
     this.addGithubUser = this.addGithubUser.bind(this);
     this.removeGithubUser = this.removeGithubUser.bind(this);
     this.addWordpressSite = this.addWordpressSite.bind(this);
     this.removeWordpressSite = this.removeWordpressSite.bind(this);
     this.save = this.save.bind(this);
+    this.toggleErrorModal = this.toggleErrorModal.bind(this);
   }
 
   addGithubUser(githubUser) {
@@ -166,8 +168,7 @@ export default class UserCreation extends GenericForm {
   save() {
     let errors = validateUser(this.state);
     if (errors) {
-      alert("There are some invalid fields");
-      this.setState({ errors });
+      this.setState({ errors, showErrorModal: true });
       console.log(errors);
       return;
     }
@@ -181,9 +182,31 @@ export default class UserCreation extends GenericForm {
     return this.state.errors && this.state.errors.name;
   }
 
+  toggleErrorModal() {
+    this.setState({ showErrorModal: !this.state.showErrorModal });
+  }
+
   render() {
     return (
       <Form>
+        <Modal
+          onClose={this.toggleErrorModal}
+          closeOnEscape
+          open={this.state.showErrorModal}
+          dimmer="blurring"
+        >
+          <Modal.Header>Validation</Modal.Header>
+          <Modal.Content>There are some invalid fields</Modal.Content>
+          <Modal.Actions>
+            <Button
+              onClick={this.toggleErrorModal}
+              positive
+              labelPosition="right"
+              icon="checkmark"
+              content="Ok"
+            />
+          </Modal.Actions>
+        </Modal>
         <Form.Group widths="equal">
           <Form.Input
             fluid
