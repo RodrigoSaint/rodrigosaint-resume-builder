@@ -7,10 +7,7 @@ class MongoRepository {
     this.mongoose.connect(
       "mongodb://admin:builder123@ds016058.mlab.com:16058/resume-builder-db"
     );
-  }
-
-  get User() {
-    return createUser(this.mongoose);
+    this.User = createUser(this.mongoose);
   }
 }
 
