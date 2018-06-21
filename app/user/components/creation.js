@@ -1,5 +1,15 @@
 import React from "react";
-import { Form, Button, List, Icon, Modal, Message } from "semantic-ui-react";
+import {
+  Form,
+  Button,
+  List,
+  Icon,
+  Modal,
+  Message,
+  Label,
+  Popup,
+  Transition
+} from "semantic-ui-react";
 import Immutable from "immutable";
 import axios from "axios";
 import { validate, isRequired } from "kaizen-validation";
@@ -113,6 +123,61 @@ class WordpressCreation extends GenericForm {
   }
 }
 
+class FullField extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showErrorLabel: false
+    };
+    this.getError = this.getError.bind(this);
+    this.getErrorDisplay = this.getErrorDisplay.bind(this);
+    this.changeErrorDisplay = this.changeErrorDisplay.bind(this);
+  }
+
+  getError() {
+    return this.props.errors && this.props.errors[this.props.property];
+  }
+
+  getErrorDisplay(property) {
+    if (
+      !this.props.errors ||
+      !this.props.errors[this.props.property] ||
+      !this.state.showErrorLabel
+    )
+      return null;
+    return (
+      <div style={{ position: "absolute", zIndex: 1 }}>
+        <Transition transitionOnMount={true} animation="scale" duration={500}>
+          <Label color="red" pointing>
+            {this.props.errors[this.props.property][0]}
+          </Label>
+        </Transition>
+      </div>
+    );
+  }
+
+  changeErrorDisplay(showErrorLabel) {
+    this.setState({ showErrorLabel });
+  }
+
+  render() {
+    return (
+      <Form.Field error={this.getError()}>
+        <label>{this.props.label}</label>
+        <input
+          onMouseEnter={() => this.changeErrorDisplay(true)}
+          onMouseLeave={() => this.changeErrorDisplay(false)}
+          placeholder={this.props.label}
+          name={this.props.property}
+          onChange={this.props.updateState}
+          value={this.props.value}
+        />
+        {this.getErrorDisplay()}
+      </Form.Field>
+    );
+  }
+}
+
 export default class UserCreation extends GenericForm {
   constructor(props) {
     super(props);
@@ -169,17 +234,12 @@ export default class UserCreation extends GenericForm {
     let errors = validateUser(this.state);
     if (errors) {
       this.setState({ errors, showErrorModal: true });
-      console.log(errors);
       return;
     }
     axios
       .post("http://localhost:8000/user", this.state)
       .then(error => alert("Sucess"))
       .catch(error => console.dir(error));
-  }
-
-  getError(property) {
-    return this.state.errors && this.state.errors.name;
   }
 
   toggleErrorModal() {
@@ -208,32 +268,28 @@ export default class UserCreation extends GenericForm {
           </Modal.Actions>
         </Modal>
         <Form.Group widths="equal">
-          <Form.Input
-            fluid
+          <FullField
             label="Name"
-            placeholder="Name"
-            onChange={this.updateState}
+            property="name"
+            errors={this.state.errors}
+            updateState={this.updateState}
             value={this.state.name}
-            error={this.getError("name")}
           />
-          <Form.Input
-            fluid
+          <FullField
             label="Url path"
-            placeholder="Url path"
-            onChange={this.updateState}
+            property="nameOnUrl"
+            errors={this.state.errors}
+            updateState={this.updateState}
             value={this.state.nameOnUrl}
-            error={this.getError("updateState")}
           />
         </Form.Group>
         <Form.Group widths="equal">
-          <Form.Input
-            fluid
+          <FullField
             label="Profile Picture"
-            placeholder="Profile Picture"
-            name="profilePicture"
-            onChange={this.updateState}
+            property="profilePicture"
+            errors={this.state.errors}
+            updateState={this.updateState}
             value={this.state.profilePicture}
-            error={this.getError("updateState")}
           />
         </Form.Group>
         <GithubCreation add={this.addGithubUser} />
