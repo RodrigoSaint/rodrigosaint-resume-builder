@@ -19,7 +19,16 @@ mainApplication.get("/user", (request, response) => {
 
 mainApplication.get("/user/:username", (request, response) => {
   repository.User.findOne({ nameOnUrl: request.params.username })
-    .then(userCollection => response.status(200).send(userCollection))
+    .then(user => response.status(200).send(user))
+    .catch(() => response.status(500));
+});
+
+mainApplication.put("/user/:username", (request, response) => {
+  repository.User.findOneAndUpdate(
+    { nameOnUrl: request.params.username },
+    this.body
+  )
+    .then(user => response.status(200).send(user))
     .catch(() => response.status(500));
 });
 

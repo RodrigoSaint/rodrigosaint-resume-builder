@@ -24,6 +24,12 @@ export default class UserCreation extends GenericForm {
       errors: null,
       showErrorModal: false
     };
+
+    if (this.props.username)
+      axios
+        .get(`http://localhost:8000/user/${this.props.username}`)
+        .then(response => this.setState({ ...response.data }));
+
     this.addGithubUser = this.addGithubUser.bind(this);
     this.removeGithubUser = this.removeGithubUser.bind(this);
     this.addWordpressSite = this.addWordpressSite.bind(this);
@@ -70,10 +76,16 @@ export default class UserCreation extends GenericForm {
       this.setState({ errors, showErrorModal: true });
       return;
     }
-    axios
-      .post("http://localhost:8000/user", this.state)
-      .then(error => alert("Sucess"))
-      .catch(error => console.dir(error));
+
+    const request =
+      undefined == this.props.username
+        ? axios.post("http://localhost:8000/user", this.state)
+        : axios.put(
+            `http://localhost:8000/user/${this.props.username}`,
+            this.state
+          );
+
+    request.then(() => alert("Sucess")).catch(error => console.dir(error));
   }
 
   toggleErrorModal() {
