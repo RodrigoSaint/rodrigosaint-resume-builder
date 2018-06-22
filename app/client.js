@@ -5,21 +5,23 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 
 import UserCreation from "./user/components/creation";
 import ResumeView from "./user/components/resume-view";
+import Menu from "./menu";
 
 ReactDOM.render(
-  <div className="ui grid centered">
-    <div className="twelve wide column">
-      <HashRouter>
-        <Switch>
+  <HashRouter>
+    <div>
+      <Menu />
+      <div className="ui grid centered">
+        <div className="thirteen wide column">
           <Route path="/signin" component={UserCreation} />
           <Route
-            path="/:username"
+            path="/resume/:username"
             render={props => <ResumeView {...props.match.params} />}
           />
-        </Switch>
-      </HashRouter>
+        </div>
+      </div>
     </div>
-  </div>,
+  </HashRouter>,
   document.getElementById("app")
 );
 module.hot.accept();
