@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default class CustomMenu extends React.Component {
   render() {
     return (
-      <Menu>
+      <Menu inverted fixed="top">
         <Menu.Item>
           <Icon circular name="id card" />
           <h2 style={{ display: "inline-block", margin: "0 10px" }}>
