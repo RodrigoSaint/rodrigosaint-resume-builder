@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Icon, Divider } from "semantic-ui-react";
 import Immutable from "immutable";
 import axios from "axios";
 
@@ -95,6 +95,10 @@ export default class UserCreation extends GenericForm {
   render() {
     return (
       <Form>
+        <h2 className="route-title">
+          {this.props.username ? "Create User" : "Update User"}
+        </h2>
+        <Divider />
         <ErrorModal
           toggleErrorModal={this.toggleErrorModal}
           showErrorModal={this.state.showErrorModal}
@@ -141,7 +145,10 @@ export default class UserCreation extends GenericForm {
           remove={this.removeWordpressSite}
           collection={this.state.wordpressUrlCollection}
         />
-        <Form.Button onClick={this.save}>Create User</Form.Button>
+        <Form.Button primary onClick={this.save}>
+          <Icon name="save" />
+          Save
+        </Form.Button>
       </Form>
     );
   }
