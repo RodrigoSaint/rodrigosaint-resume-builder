@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Github from "semantic-ui-github-components";
 import Wordpress from "semantic-ui-wordpress-components";
-import { Tab } from "semantic-ui-react";
+import { Tab, Header, Image } from "semantic-ui-react";
 
 const GithubSection = props => (
   <div>
@@ -32,6 +32,7 @@ export default class ResumeView extends React.Component {
       .catch(() => alert("User not found"));
     this.state = {
       name: "",
+      tagLine: "",
       profilePicture: "",
       githubUsernameCollection: [],
       wordpressUrlCollection: []
@@ -71,10 +72,19 @@ export default class ResumeView extends React.Component {
 
   render() {
     return (
-      <Tab
-        menu={{ secondary: true, pointing: true }}
-        panes={this.paneCollection}
-      />
+      <div>
+        <Header as="h2">
+          <Image circular src={this.state.profilePicture} />
+          <Header.Content>
+            {this.state.name}
+            <Header.Subheader>{this.state.tagLine}</Header.Subheader>
+          </Header.Content>
+        </Header>
+        <Tab
+          menu={{ secondary: true, pointing: true }}
+          panes={this.paneCollection}
+        />
+      </div>
     );
   }
 }

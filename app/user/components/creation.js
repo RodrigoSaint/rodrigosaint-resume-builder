@@ -17,6 +17,7 @@ export default class UserCreation extends GenericForm {
     this.state = {
       name: "",
       nameOnUrl: "",
+      tagLine: "",
       profilePicture: "",
       githubUsernameCollection: new Immutable.List(),
       wordpressUrlCollection: new Immutable.List(),
@@ -109,6 +110,13 @@ export default class UserCreation extends GenericForm {
             errors={this.state.errors}
             updateState={this.updateState}
             value={this.state.profilePicture}
+          />
+          <FullField
+            label="Tag Line"
+            property="tagLine"
+            errors={this.state.errors}
+            updateState={this.updateState}
+            value={this.state.tagLine}
           />
         </Form.Group>
         <GithubCreation add={this.addGithubUser} />
