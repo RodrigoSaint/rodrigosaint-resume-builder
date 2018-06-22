@@ -7,10 +7,15 @@ export default class CustomMenu extends React.Component {
     return (
       <Menu inverted fixed="top">
         <Menu.Item>
-          <Icon circular name="id card" />
-          <h2 style={{ display: "inline-block", margin: "0 10px" }}>
-            Resume online
-          </h2>
+          <Link to="/">
+            <Icon circular name="id card" />
+            <h2 style={{ display: "inline-block", margin: "0 10px" }}>
+              Resume online
+            </h2>
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="talents">Our talents list</Link>
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>

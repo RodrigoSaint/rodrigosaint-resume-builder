@@ -4,6 +4,7 @@ import "./index.css";
 import { HashRouter, Route } from "react-router-dom";
 
 import UserForm from "./user/components/form";
+import TalentDisplay from "./user/components/talent-display";
 import ResumeView from "./user/components/resume-view";
 import Homepage from "./homepage";
 import Menu from "./menu";
@@ -24,6 +25,7 @@ ReactDOM.render(
             path="/:username/edit"
             render={props => <UserForm {...props.match.params} />}
           />
+          <Route path="/talents" component={TalentDisplay} />
         </div>
       </div>
     </div>
