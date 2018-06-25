@@ -1,6 +1,7 @@
 import React from "react";
 import { Segment, Header, Container, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { GET_STARTED, HOME_SUB_TITLE, HOME_TITLE } from "../const/messages";
 
 export default () => (
   <div>
@@ -8,7 +9,7 @@ export default () => (
       <Container text>
         <Header
           as="h1"
-          content="Build your own Online Resume"
+          content={HOME_TITLE}
           inverted
           style={{
             fontSize: "3.25em",
@@ -18,7 +19,7 @@ export default () => (
         />
         <Header
           as="h2"
-          content="Why delivery .docs or pdfs while you can serve your resume with up-to-date data with and with a simple link?"
+          content={HOME_SUB_TITLE}
           inverted
           style={{
             fontSize: "1.7em",
@@ -28,7 +29,7 @@ export default () => (
         />
         <Link to="/signin">
           <Button primary size="huge">
-            Get started
+            {GET_STARTED}
             <Icon name="right arrow" />
           </Button>
         </Link>

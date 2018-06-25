@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Button, Card, Image, Divider } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { OUR_TALENT_LIST } from "../../const/messages";
 
 export default class TalentDisplay extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class TalentDisplay extends React.Component {
   render() {
     return (
       <div>
-        <h2 className="route-title">Our Talent List</h2>
+        <h2 className="route-title">{OUR_TALENT_LIST}</h2>
         <Divider />
         <Card.Group>
           {this.state.userCollection.map(user => (

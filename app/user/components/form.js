@@ -10,6 +10,15 @@ import GithubCreation from "./github-creation";
 import WordpressCreation from "./wordpress-creation";
 import ErrorModal from "./error-modal";
 import validateUser from "../validation";
+import {
+  USER_CREATE_TITLE,
+  USER_UPDATE_TITLE,
+  USER_LABEL_NAME,
+  USER_LABEL_NAME_ON_URL,
+  USER_LABEL_PROFILE_PICTURE,
+  USER_LABEL_TAG_LINE,
+  BUTTON_SAVE
+} from "../../const/messages";
 
 export default class UserCreation extends GenericForm {
   constructor(props) {
@@ -96,7 +105,7 @@ export default class UserCreation extends GenericForm {
     return (
       <Form>
         <h2 className="route-title">
-          {this.props.username ? "Create User" : "Update User"}
+          {this.props.username ? USER_CREATE_TITLE : USER_UPDATE_TITLE}
         </h2>
         <Divider />
         <ErrorModal
@@ -105,14 +114,14 @@ export default class UserCreation extends GenericForm {
         />
         <Form.Group widths="equal">
           <FullField
-            label="Name"
+            label={USER_LABEL_NAME}
             property="name"
             errors={this.state.errors}
             updateState={this.updateState}
             value={this.state.name}
           />
           <FullField
-            label="Url path"
+            label={USER_LABEL_NAME_ON_URL}
             property="nameOnUrl"
             errors={this.state.errors}
             updateState={this.updateState}
@@ -121,14 +130,14 @@ export default class UserCreation extends GenericForm {
         </Form.Group>
         <Form.Group widths="equal">
           <FullField
-            label="Profile Picture"
+            label={USER_LABEL_PROFILE_PICTURE}
             property="profilePicture"
             errors={this.state.errors}
             updateState={this.updateState}
             value={this.state.profilePicture}
           />
           <FullField
-            label="Tag Line"
+            label={USER_LABEL_TAG_LINE}
             property="tagLine"
             errors={this.state.errors}
             updateState={this.updateState}
@@ -147,7 +156,7 @@ export default class UserCreation extends GenericForm {
         />
         <Form.Button primary onClick={this.save}>
           <Icon name="save" />
-          Save
+          {BUTTON_SAVE}
         </Form.Button>
       </Form>
     );

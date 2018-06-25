@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { OUR_TALENT_LIST, SIGN_IN, LOGIN } from "../const/messages";
 
 export default class CustomMenu extends React.Component {
   render() {
@@ -15,14 +16,14 @@ export default class CustomMenu extends React.Component {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="talents">Our talents list</Link>
+          <Link to="talents">{OUR_TALENT_LIST}</Link>
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>
-            <Link to="/signin">Sign in</Link>
+            <Link to="/signin">{SIGN_IN}</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/login">Login</Link>
+            <Link to="/login">{LOGIN}</Link>
           </Menu.Item>
         </Menu.Menu>
       </Menu>
