@@ -6,7 +6,9 @@ import {
   Divider,
   Input,
   Button,
-  Image
+  Icon,
+  Image,
+  Form
 } from "semantic-ui-react";
 import axios from "axios";
 
@@ -70,6 +72,21 @@ class Chat extends GenericForm {
     this.setState({ messageCollection, message: "" });
   }
 
+  get InfoMessage() {
+    if (this.state.messageCollection && this.state.messageCollection.size > 0)
+      return null;
+    return (
+      <Message info icon>
+        <Icon name="info" />
+        <Message.Content>
+          <Message.Header>{`${this.firstname}'s chat bot`}</Message.Header>
+          Here you can have a predefined chat experience with the user. Try
+          saying hi or where do you work for exemple.
+        </Message.Content>
+      </Message>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -78,15 +95,21 @@ class Chat extends GenericForm {
         {this.state.messageCollection.map(message => (
           <ChatMessage {...message} />
         ))}
+        {this.InfoMessage}
         <Divider />
-        <Input fluid type="text" placeholder="Type your message" action>
-          <input
-            name="message"
-            value={this.state.message}
-            onInput={this.updateState}
-          />
-          <Button onClick={this.sendRequest}>Send</Button>
-        </Input>
+        <Form>
+          <Input fluid type="text" placeholder="Type your message" action>
+            <input
+              name="message"
+              value={this.state.message}
+              onInput={this.updateState}
+            />
+            <Button type="submit" primary onClick={this.sendRequest}>
+              <Icon name="send" />
+              Send
+            </Button>
+          </Input>
+        </Form>
       </div>
     );
   }

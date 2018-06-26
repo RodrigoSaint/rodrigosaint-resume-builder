@@ -2,9 +2,29 @@ import React from "react";
 import axios from "axios";
 import Github from "semantic-ui-github-components";
 import Wordpress from "semantic-ui-wordpress-components";
-import { Tab, Header, Image } from "semantic-ui-react";
+import { Tab, Header, Image, Popup, Icon } from "semantic-ui-react";
 import { mainEndpoint } from "../../const/endpoint";
 import Chat from "../../chat/";
+
+const ChatPopup = props => (
+  <Popup
+    trigger={
+      <Icon
+        inverted
+        circular
+        size="big"
+        style={{ position: "fixed", right: "50px", bottom: "50px", zIndex: 1 }}
+        name="chat"
+      />
+    }
+    on="click"
+    position="top right"
+  >
+    <div style={{ width: "50vw" }}>
+      <Chat {...props} />
+    </div>
+  </Popup>
+);
 
 const GithubSection = props => (
   <div>
@@ -82,7 +102,7 @@ export default class ResumeView extends React.Component {
             <Header.Subheader>{this.state.tagLine}</Header.Subheader>
           </Header.Content>
         </Header>
-        <Chat user={this.state} />
+        <ChatPopup user={this.state} />
         <Tab
           menu={{ secondary: true, pointing: true }}
           panes={this.paneCollection}
