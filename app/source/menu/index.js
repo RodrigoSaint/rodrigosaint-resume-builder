@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { OUR_TALENT_LIST, SIGN_IN, LOGIN } from "../const/messages";
 
@@ -23,7 +23,12 @@ export default class CustomMenu extends React.Component {
             <Link to="/signin">{SIGN_IN}</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/login">{LOGIN}</Link>
+            <Link to="/login">
+              <Button primary>
+                <Icon name="linkedin square" />
+                {LOGIN}
+              </Button>
+            </Link>
           </Menu.Item>
         </Menu.Menu>
       </Menu>

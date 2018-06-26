@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Input, Icon } from "semantic-ui-react";
 import GenericForm from "../../common/components/generic-form";
 import { GITHUB_USERNAME, BUTTON_ADD } from "../../const/messages";
 
@@ -14,27 +14,27 @@ export default class GithubCreation extends GenericForm {
   }
 
   add() {
+    debugger;
+    if (!this.state.githubUsername) return;
     this.props.add(this.state.githubUsername);
     this.setState({ githubUsername: "" });
   }
 
   render() {
     return (
-      <Form.Group widths="equal">
-        <Form.Field>
-          <label>{GITHUB_USERNAME}:</label>
+      <Form.Field>
+        <label>{GITHUB_USERNAME}:</label>
+        <Input>
           <input
             name="githubUsername"
             value={this.state.githubUsername}
             onChange={this.updateState}
           />
-        </Form.Field>
-        <Form.Field>
-          <Button className="margin-top-default" onClick={this.add}>
-            {BUTTON_ADD}
+          <Button color="green" onClick={this.add}>
+            <Icon name="add" /> {BUTTON_ADD}
           </Button>
-        </Form.Field>
-      </Form.Group>
+        </Input>
+      </Form.Field>
     );
   }
 }

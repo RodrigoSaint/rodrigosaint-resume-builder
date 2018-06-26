@@ -103,7 +103,7 @@ export default class UserCreation extends GenericForm {
     return (
       <Form>
         <h2 className="route-title">
-          {this.props.username ? USER_CREATE_TITLE : USER_UPDATE_TITLE}
+          {this.props.username ? USER_UPDATE_TITLE : USER_CREATE_TITLE}
         </h2>
         <Divider />
         <ErrorModal

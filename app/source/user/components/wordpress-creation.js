@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Input, Icon } from "semantic-ui-react";
 import GenericForm from "../../common/components/generic-form";
 
 export default class WordpressCreation extends GenericForm {
@@ -12,27 +12,27 @@ export default class WordpressCreation extends GenericForm {
   }
 
   add() {
+    if (!this.state.wordpressUrl) return;
     this.props.add(this.state.wordpressUrl);
     this.setState({ wordpressUrl: "" });
   }
 
   render() {
     return (
-      <Form.Group widths="equal">
-        <Form.Field>
-          <label>Wordpress Url:</label>
+      <Form.Field>
+        <label>Wordpress Url:</label>
+        <Input>
           <input
             name="wordpressUrl"
             value={this.state.wordpressUrl}
             onChange={this.updateState}
           />
-        </Form.Field>
-        <Form.Field>
-          <Button className="margin-top-default" onClick={this.add}>
+          <Button color="green" onClick={this.add}>
+            <Icon name="add" />
             Add
           </Button>
-        </Form.Field>
-      </Form.Group>
+        </Input>
+      </Form.Field>
     );
   }
 }

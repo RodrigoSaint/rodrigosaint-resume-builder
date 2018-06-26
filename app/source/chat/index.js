@@ -80,8 +80,11 @@ class Chat extends GenericForm {
         <Icon name="info" />
         <Message.Content>
           <Message.Header>{`${this.firstname}'s chat bot`}</Message.Header>
-          Here you can have a predefined chat experience with the user. Try
-          saying hi or where do you work for exemple.
+          Here you can have a predefined chat experience with the user.
+          <br />
+          <strong>
+            You can try saying hi or where do you work for exemple.
+          </strong>
         </Message.Content>
       </Message>
     );

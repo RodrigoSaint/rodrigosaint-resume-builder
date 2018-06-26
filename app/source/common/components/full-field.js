@@ -1,5 +1,10 @@
 import React from "react";
 import { Form, Label, Transition } from "semantic-ui-react";
+import { REQUIRED_ERROR } from "../../const/messages";
+
+const errorDictionary = {
+  required_error: REQUIRED_ERROR
+};
 
 export default class FullField extends React.Component {
   constructor(props) {
@@ -23,11 +28,12 @@ export default class FullField extends React.Component {
       !this.state.showErrorLabel
     )
       return null;
+    const error = this.props.errors[this.props.property][0];
     return (
       <div style={{ position: "absolute", zIndex: 1 }}>
         <Transition transitionOnMount={true} animation="scale" duration={500}>
           <Label color="red" pointing>
-            {this.props.errors[this.props.property][0]}
+            {errorDictionary[error]}
           </Label>
         </Transition>
       </div>

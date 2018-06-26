@@ -7,7 +7,7 @@ export const GET_STARTED = "Get started";
 //Menu
 export const OUR_TALENT_LIST = "Our talents list";
 export const SIGN_IN = "Sign in";
-export const LOGIN = "Login";
+export const LOGIN = "Login with Linkedin";
 
 //Signin
 export const USER_CREATE_TITLE = "Create User";
@@ -26,3 +26,6 @@ export const BUTTON_ADD = "Add";
 
 //Talent List
 export const CHECK_USER_RESUME = "Check ${0}'s Resume";
+
+//Errors
+export const REQUIRED_ERROR = "This field is required";
