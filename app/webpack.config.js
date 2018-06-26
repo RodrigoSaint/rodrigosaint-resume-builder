@@ -3,7 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: ["./app/client.js", "react-hot-loader/patch"],
+  entry: ["./source/index.js", "react-hot-loader/patch"],
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "index.js"
@@ -26,7 +26,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "app/index.html" }),
+    new HtmlWebpackPlugin({ template: "source/index.html" }),
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {

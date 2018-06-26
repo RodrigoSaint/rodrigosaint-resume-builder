@@ -3,6 +3,7 @@ import axios from "axios";
 import Github from "semantic-ui-github-components";
 import Wordpress from "semantic-ui-wordpress-components";
 import { Tab, Header, Image } from "semantic-ui-react";
+import { mainEndpoint } from "../../const/endpoint";
 
 const GithubSection = props => (
   <div>
@@ -27,7 +28,7 @@ export default class ResumeView extends React.Component {
   constructor(props) {
     super(props);
     axios
-      .get(`http://localhost:8000/user/${props.username}`)
+      .get(`${mainEndpoint}/user/${props.username}`)
       .then(result => this.setState(result.data))
       .catch(() => alert("User not found"));
     this.state = {

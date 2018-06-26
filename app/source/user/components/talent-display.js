@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, Card, Image, Divider } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { OUR_TALENT_LIST } from "../../const/messages";
+import { mainEndpoint } from "../../const/endpoint";
 
 export default class TalentDisplay extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class TalentDisplay extends React.Component {
       userCollection: []
     };
     axios
-      .get("http://localhost:8000/user")
+      .get(`${mainEndpoint}/user`)
       .then(response => this.setState({ userCollection: response.data }));
   }
 

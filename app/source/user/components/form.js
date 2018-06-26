@@ -19,6 +19,7 @@ import {
   USER_LABEL_TAG_LINE,
   BUTTON_SAVE
 } from "../../const/messages";
+import { mainEndpoint } from "../../const/endpoint";
 
 export default class UserCreation extends GenericForm {
   constructor(props) {
@@ -36,7 +37,7 @@ export default class UserCreation extends GenericForm {
 
     if (this.props.username)
       axios
-        .get(`http://localhost:8000/user/${this.props.username}`)
+        .get(`${mainEndpoint}/user/${this.props.username}`)
         .then(response => this.setState({ ...response.data }));
 
     this.addGithubUser = this.addGithubUser.bind(this);
@@ -88,11 +89,8 @@ export default class UserCreation extends GenericForm {
 
     const request =
       undefined == this.props.username
-        ? axios.post("http://localhost:8000/user", this.state)
-        : axios.put(
-            `http://localhost:8000/user/${this.props.username}`,
-            this.state
-          );
+        ? axios.post(`${mainEndpoint}/user`, this.state)
+        : axios.put(`${mainEndpoint}/user/${this.props.username}`, this.state);
 
     request.then(() => alert("Sucess")).catch(error => console.dir(error));
   }
