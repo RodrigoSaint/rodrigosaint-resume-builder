@@ -1,0 +1,13 @@
+{
+  "name": "rodrigosaint-resume-builder",
+  "version": "0.1.0",
+  "description": "A site to build resumes online",
+  "main": "index.js",
+  "author": "Rodrigo Santos da Silva<rodrigo.saint01@live.com>",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {
+    "co": "^4.6.0",
+    "mongoose": "^5.1.4"
+  }
+}

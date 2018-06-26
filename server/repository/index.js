@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import createUser from "../user/repository";
+const mongoose = require("mongoose");
+const createUser = require("../user/repository");
 
 class MongoRepository {
   constructor() {
@@ -11,4 +11,4 @@ class MongoRepository {
   }
 }
 
-export default new MongoRepository();
+module.exports = new MongoRepository();

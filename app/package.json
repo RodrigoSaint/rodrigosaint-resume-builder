@@ -8,7 +8,7 @@
   "scripts": {
     "babel": "babel-node server/index.js",
     "build": "webpack --config ./webpack.config.js --mode production",
-    "build:server": "webpack --config ./webpack.node.config.js --mode production",
+    "build:server": "webpack --config ./webpack.node.config.js --mode development",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+const { Schema } = require("mongoose");
 
 const userSchema = new Schema({
   nameOnUrl: { type: String, unique: true },
@@ -9,4 +9,4 @@ const userSchema = new Schema({
   wordpressUrlCollection: [String]
 });
 
-export default mongoose => mongoose.model("userCollection", userSchema);
+module.exports = mongoose => mongoose.model("userCollection", userSchema);
