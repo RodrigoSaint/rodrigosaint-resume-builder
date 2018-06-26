@@ -4,6 +4,7 @@ import Github from "semantic-ui-github-components";
 import Wordpress from "semantic-ui-wordpress-components";
 import { Tab, Header, Image } from "semantic-ui-react";
 import { mainEndpoint } from "../../const/endpoint";
+import Chat from "../../chat/";
 
 const GithubSection = props => (
   <div>
@@ -81,6 +82,7 @@ export default class ResumeView extends React.Component {
             <Header.Subheader>{this.state.tagLine}</Header.Subheader>
           </Header.Content>
         </Header>
+        <Chat user={this.state} />
         <Tab
           menu={{ secondary: true, pointing: true }}
           panes={this.paneCollection}
