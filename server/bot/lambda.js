@@ -24,13 +24,17 @@ function getIntent(text) {
 async function message(event) {
   const intent = await getIntent(event.body);
   const actions = {
-    greeting: () => new Response(200, "Hello! I am a bot"),
+    greeting: () =>
+      new Response(
+        200,
+        "Hello! I am {username}'s bot. I am here to help you to tell a little bit more about {username}. What would you like to know?"
+      ),
     introduce: () =>
       new Response(
         200,
         "My name is Rodrigo Santos da Silva and I'm 23 years old. I've started programming when I was 12, and since then I didn't stop. I've learned C#, Node, Typescript, Mongo, Cordova, SQL, Vue.js, React and Angular2^. I'm a good developer and I'm always interested to learn new things."
       ),
-    "recruiter-introduction": () => new Response(200, "Hi recruiter"),
+    "recruiter-introduction": () => new Response(200, "Hi {recruiter}"),
     skills: () => new Response(200, "I know many stuff"),
     "experience-time": () => new Response(200, "I have 5 years of experience"),
     "current-experience": () => new Response(200, "I work at talk telecom")
