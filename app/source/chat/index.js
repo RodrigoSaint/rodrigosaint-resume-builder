@@ -47,11 +47,15 @@ class Chat extends GenericForm {
     return this.props.user ? this.props.user.name.split(" ")[0] : "";
   }
 
+  prepareBotResponse(response) {
+    return response.replace(/{username}/g, this.firstname);
+  }
+
   createBotResponse(response) {
     const messageCollection = this.state.messageCollection.push({
       profilePicture: this.props.user.profilePicture,
-      name: this.props.user.name,
-      text: response
+      name: `${this.firstname}'s bot`,
+      text: this.prepareBotResponse(response)
     });
     this.setState({ messageCollection });
   }
