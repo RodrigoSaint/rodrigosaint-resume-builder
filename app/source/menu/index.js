@@ -16,7 +16,7 @@ export default class CustomMenu extends React.Component {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="talents">{OUR_TALENT_LIST}</Link>
+          <Link to="/talents">{OUR_TALENT_LIST}</Link>
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>
