@@ -39,4 +39,5 @@ ReactDOM.render(
   </HashRouter>,
   document.getElementById("app")
 );
+
 module.hot.accept();
