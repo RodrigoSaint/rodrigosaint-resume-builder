@@ -1,9 +1,11 @@
 const AssistantV1 = require("watson-developer-cloud/assistant/v1");
 const { Response } = require("../lambda");
+const dotenv = require("dotenv");
+dotenv.load();
 
 const watsonAssistant = new AssistantV1({
   version: "2018-02-16",
-  iam_apikey: "-n36OEjFLTbb18X3rV9Hxs9KIxfNobu4Oh1FnmGv_bpG",
+  iam_apikey: process.env.iam_apikey,
   url: "https://gateway-wdc.watsonplatform.net/assistant/api"
 });
 
@@ -11,7 +13,7 @@ function getIntent(text) {
   return new Promise((resolve, reject) => {
     watsonAssistant.message(
       {
-        workspace_id: "8d635471-b10d-4137-8e4a-2f3bb213d485",
+        workspace_id: process.env.workspace_id,
         input: { text }
       },
       (err, response) => {
